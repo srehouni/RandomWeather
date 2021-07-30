@@ -29,6 +29,7 @@ class RemoteWeatherLoader {
     
     enum Error {
         case connectivity
+        case serverError
     }
 
     init(url: URL, client: HTTPClient) {
@@ -37,16 +38,25 @@ class RemoteWeatherLoader {
     }
     
     func loadWeather(completion: @escaping (Result) -> Void) {
-        client.get(url: url) { result in
+        client.get(url: url) { [weak self] result in
             switch result {
-                case let .success:
-                    completion(.success(Weather()))
+                case let .success(_, response):
+                    if self?.isAValidStatusCode(code: response.statusCode) == true {
+                        completion(.success(Weather()))
+                    } else {
+                        completion(.failure(.serverError))
+                    }
+                    
                     break
-                case let .failure:
+                case .failure:
                     completion(.failure(.connectivity))
                     break
             }
         }
+    }
+    
+    private func isAValidStatusCode(code: Int) -> Bool {
+        return code == 200
     }
 }
 
@@ -92,6 +102,29 @@ class RemoteWeatherLoaderTests: XCTestCase {
         }
         
         XCTAssertNotNil(capturedWeather)
+    }
+    
+    func test_loadWeatherDeliversNon200HTTPStatusCode() {
+        let url = URL(string: "https://google.com")!
+        let client = HTTPClientSpy()
+        let sut = RemoteWeatherLoader(url: url, client: client)
+        
+        client.result = .success(Data(), HTTPURLResponse(url: url,
+                                                         statusCode: 300,
+                                                         httpVersion: nil,
+                                                         headerFields: nil)!)
+        var capturedError: RemoteWeatherLoader.Error?
+        
+        sut.loadWeather { result in
+            switch result {
+            case let .failure(error):
+                capturedError = error
+            default:
+                break
+            }
+        }
+        
+        XCTAssertEqual(capturedError, .serverError)
     }
 
     //MARK: Helpers
