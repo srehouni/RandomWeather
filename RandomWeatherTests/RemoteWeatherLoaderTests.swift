@@ -15,20 +15,17 @@ enum HTTPClientResult {
 }
 
 protocol HTTPClient {
-    func get(url: URL, completion: @escaping (Error?) -> Void)
-}
-
-class HTTPClientSpy: HTTPClient {
-    var error: Error?
-    
-    func get(url: URL, completion: @escaping (Error?) -> Void) {
-        completion(error)
-    }
+    func get(url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
 
 class RemoteWeatherLoader {
     let url: URL
     let client: HTTPClient
+    
+    enum Result {
+        case success(Weather)
+        case failure(Error)
+    }
     
     enum Error {
         case connectivity
@@ -39,10 +36,15 @@ class RemoteWeatherLoader {
         self.client = client
     }
     
-    func loadWeather(completion: @escaping (Error?) -> Void) {
-        client.get(url: url) { error in
-            if error != nil {
-                completion(.connectivity)
+    func loadWeather(completion: @escaping (Result) -> Void) {
+        client.get(url: url) { result in
+            switch result {
+                case let .success:
+                    completion(.success(Weather()))
+                    break
+                case let .failure:
+                    completion(.failure(.connectivity))
+                    break
             }
         }
     }
@@ -55,32 +57,52 @@ class RemoteWeatherLoaderTests: XCTestCase {
         let sut = RemoteWeatherLoader(url: URL(string: "https://google.com")!, client: client)
         
         var capturedError: RemoteWeatherLoader.Error?
-        client.error = NSError(domain: "an error", code: 0, userInfo: nil)
+        client.result = .failure(NSError(domain: "an error", code: 0, userInfo: nil))
         
         sut.loadWeather { result in
-            capturedError = result
+            switch result {
+            case let .failure(error):
+                capturedError = error
+            default:
+                break
+            }
         }
         
         XCTAssertEqual(capturedError, .connectivity)
     }
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func test_loadWeatherDeliversWeather() {
+        let url = URL(string: "https://google.com")!
+        let client = HTTPClientSpy()
+        let sut = RemoteWeatherLoader(url: url, client: client)
+        
+        client.result = .success(Data(), HTTPURLResponse(url: url,
+                                                         statusCode: 200,
+                                                         httpVersion: nil,
+                                                         headerFields: nil)!)
+        var capturedWeather: Weather?
+        
+        sut.loadWeather { result in
+            switch result {
+            case let .success(weather):
+                capturedWeather = weather
+            default:
+                break
+            }
+        }
+        
+        XCTAssertNotNil(capturedWeather)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    //MARK: Helpers
+    
+    private class HTTPClientSpy: HTTPClient {
+        var result: HTTPClientResult?
+        
+        func get(url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+            if let result = result {
+                completion(result)
+            }
         }
     }
 
