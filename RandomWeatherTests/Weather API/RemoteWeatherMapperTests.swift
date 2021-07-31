@@ -65,6 +65,39 @@ struct RemoteSys: Decodable {
 }
 
 class RemoteWeatherMapperTests: XCTestCase {
+    
+    func test_getsNilWhenMappingAnEmptyJSON() {
+        let mapper = RemoteWeatherLoaderMapperClass()
+        
+        let json = """
+            {}
+            """
+        
+        let data = Data(json.utf8)
+        let weather = mapper.map(data, from: HTTPURLResponse(url: URL(string: "https://google.com")!,
+                                                            statusCode: 200,
+                                                            httpVersion: nil,
+                                                            headerFields: nil)!)
+
+        XCTAssertNil(weather)
+    }
+    
+    func test_getsCorrectWeatherWhenMappingAWrongJSON() {
+        let mapper = RemoteWeatherLoaderMapperClass()
+        
+        let json = """
+            {"test" : "test"}
+            """
+        
+        let data = Data(json.utf8)
+        let weather = mapper.map(data, from: HTTPURLResponse(url: URL(string: "https://google.com")!,
+                                                            statusCode: 200,
+                                                            httpVersion: nil,
+                                                            headerFields: nil)!)
+
+        XCTAssertNil(weather)
+    }
+    
     func test_getsCorrectWeatherWhenMappingCorrectJSON() {
         let mapper = RemoteWeatherLoaderMapperClass()
         
