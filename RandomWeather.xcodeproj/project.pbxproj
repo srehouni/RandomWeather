@@ -15,6 +15,10 @@
 		8E8D204326B47F8600EAED04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E8D204126B47F8600EAED04 /* LaunchScreen.storyboard */; };
 		8E8D204E26B47F8600EAED04 /* RandomWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D204D26B47F8600EAED04 /* RandomWeatherTests.swift */; };
 		8E8D206726B48CF100EAED04 /* RemoteWeatherLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206626B48CF100EAED04 /* RemoteWeatherLoaderTests.swift */; };
+		8E8D206A26B55A8B00EAED04 /* RemoteWeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206926B55A8B00EAED04 /* RemoteWeatherLoader.swift */; };
+		8E8D206D26B560A000EAED04 /* WeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206C26B560A000EAED04 /* WeatherLoader.swift */; };
+		8E8D206F26B560F400EAED04 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206E26B560F400EAED04 /* Weather.swift */; };
+		8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207026B5616700EAED04 /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		8E8D204D26B47F8600EAED04 /* RandomWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWeatherTests.swift; sourceTree = "<group>"; };
 		8E8D204F26B47F8600EAED04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E8D206626B48CF100EAED04 /* RemoteWeatherLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderTests.swift; sourceTree = "<group>"; };
+		8E8D206926B55A8B00EAED04 /* RemoteWeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoader.swift; sourceTree = "<group>"; };
+		8E8D206C26B560A000EAED04 /* WeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLoader.swift; sourceTree = "<group>"; };
+		8E8D206E26B560F400EAED04 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		8E8D207026B5616700EAED04 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,8 @@
 		8E8D203526B47F8400EAED04 /* RandomWeather */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D206B26B55AA200EAED04 /* Domain */,
+				8E8D206826B55A6F00EAED04 /* Weather API */,
 				8E8D203626B47F8400EAED04 /* AppDelegate.swift */,
 				8E8D203826B47F8400EAED04 /* SceneDelegate.swift */,
 				8E8D203A26B47F8400EAED04 /* ViewController.swift */,
@@ -100,6 +110,24 @@
 				8E8D206626B48CF100EAED04 /* RemoteWeatherLoaderTests.swift */,
 			);
 			path = RandomWeatherTests;
+			sourceTree = "<group>";
+		};
+		8E8D206826B55A6F00EAED04 /* Weather API */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D206926B55A8B00EAED04 /* RemoteWeatherLoader.swift */,
+				8E8D207026B5616700EAED04 /* HTTPClient.swift */,
+			);
+			path = "Weather API";
+			sourceTree = "<group>";
+		};
+		8E8D206B26B55AA200EAED04 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D206C26B560A000EAED04 /* WeatherLoader.swift */,
+				8E8D206E26B560F400EAED04 /* Weather.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +232,11 @@
 			files = (
 				8E8D203B26B47F8400EAED04 /* ViewController.swift in Sources */,
 				8E8D203726B47F8400EAED04 /* AppDelegate.swift in Sources */,
+				8E8D206D26B560A000EAED04 /* WeatherLoader.swift in Sources */,
+				8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */,
 				8E8D203926B47F8400EAED04 /* SceneDelegate.swift in Sources */,
+				8E8D206F26B560F400EAED04 /* Weather.swift in Sources */,
+				8E8D206A26B55A8B00EAED04 /* RemoteWeatherLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
