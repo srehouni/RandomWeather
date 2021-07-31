@@ -6,70 +6,7 @@
 //
 
 import XCTest
-
-struct Weather {}
-
-enum HTTPClientResult {
-    case success(Data, HTTPURLResponse)
-    case failure(Error)
-}
-
-protocol HTTPClient {
-    func get(url: URL, completion: @escaping (HTTPClientResult) -> Void)
-}
-
-protocol RemoteWeatherLoaderMapper {
-    func map(_ data: Data, from response: HTTPURLResponse) -> Weather?
-}
-
-class RemoteWeatherLoader {
-    let url: URL
-    let client: HTTPClient
-    let mapper: RemoteWeatherLoaderMapper
-    
-    enum Result {
-        case success(Weather)
-        case failure(Error)
-    }
-    
-    enum Error {
-        case connectivity
-        case serverError
-        case invalidData
-    }
-
-    init(url: URL, client: HTTPClient, mapper: RemoteWeatherLoaderMapper) {
-        self.url = url
-        self.client = client
-        self.mapper = mapper
-    }
-    
-    func loadWeather(completion: @escaping (Result) -> Void) {
-        client.get(url: url) { [weak self] result in
-            switch result {
-                case let .success(data, response):
-                    if self?.isAValidStatusCode(code: response.statusCode) == true {
-                        guard let weather = self?.mapper.map(data, from: response) else {
-                            completion(.failure(.invalidData))
-                            return
-                        }
-                        completion(.success(weather))
-                    } else {
-                        completion(.failure(.serverError))
-                    }
-                    
-                    break
-                case .failure:
-                    completion(.failure(.connectivity))
-                    break
-            }
-        }
-    }
-    
-    private func isAValidStatusCode(code: Int) -> Bool {
-        return code == 200
-    }
-}
+import RandomWeather
 
 class RemoteWeatherLoaderTests: XCTestCase {
     
@@ -82,7 +19,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         sut.loadWeather { result in
             switch result {
             case let .failure(error):
-                capturedError = error
+                capturedError = error as? RemoteWeatherLoader.Error
             default:
                 break
             }
@@ -127,7 +64,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         sut.loadWeather { result in
             switch result {
             case let .failure(error):
-                capturedError = error
+                capturedError = error as? RemoteWeatherLoader.Error
             default:
                 break
             }
@@ -150,7 +87,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         sut.loadWeather { result in
             switch result {
             case let .failure(error):
-                capturedError = error
+                capturedError = error as? RemoteWeatherLoader.Error
             default:
                 break
             }
