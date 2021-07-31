@@ -19,6 +19,7 @@
 		8E8D206D26B560A000EAED04 /* WeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206C26B560A000EAED04 /* WeatherLoader.swift */; };
 		8E8D206F26B560F400EAED04 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206E26B560F400EAED04 /* Weather.swift */; };
 		8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207026B5616700EAED04 /* HTTPClient.swift */; };
+		8E8D207426B56DAD00EAED04 /* RemoteWeatherMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		8E8D206C26B560A000EAED04 /* WeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLoader.swift; sourceTree = "<group>"; };
 		8E8D206E26B560F400EAED04 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		8E8D207026B5616700EAED04 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherMapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +107,9 @@
 		8E8D204C26B47F8600EAED04 /* RandomWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D207226B56D8E00EAED04 /* Weather API */,
 				8E8D204D26B47F8600EAED04 /* RandomWeatherTests.swift */,
 				8E8D204F26B47F8600EAED04 /* Info.plist */,
-				8E8D206626B48CF100EAED04 /* RemoteWeatherLoaderTests.swift */,
 			);
 			path = RandomWeatherTests;
 			sourceTree = "<group>";
@@ -128,6 +130,15 @@
 				8E8D206E26B560F400EAED04 /* Weather.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		8E8D207226B56D8E00EAED04 /* Weather API */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D206626B48CF100EAED04 /* RemoteWeatherLoaderTests.swift */,
+				8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */,
+			);
+			path = "Weather API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +257,7 @@
 			files = (
 				8E8D206726B48CF100EAED04 /* RemoteWeatherLoaderTests.swift in Sources */,
 				8E8D204E26B47F8600EAED04 /* RandomWeatherTests.swift in Sources */,
+				8E8D207426B56DAD00EAED04 /* RemoteWeatherMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
