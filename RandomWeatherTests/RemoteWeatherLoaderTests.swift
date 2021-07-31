@@ -74,8 +74,7 @@ class RemoteWeatherLoader {
 class RemoteWeatherLoaderTests: XCTestCase {
     
     func test_loadWeatherDeliversConnectivityError() {
-        let client = HTTPClientSpy()
-        let sut = RemoteWeatherLoader(url: URL(string: "https://google.com")!, client: client, mapper: RemoteWeatherLoaderMapperSpy())
+        let (client, _, sut) = makeSUT()
         
         var capturedError: RemoteWeatherLoader.Error?
         client.result = .failure(NSError(domain: "an error", code: 0, userInfo: nil))
@@ -94,9 +93,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     
     func test_loadWeatherDeliversWeather() {
         let url = URL(string: "https://google.com")!
-        let client = HTTPClientSpy()
-        let mapper = RemoteWeatherLoaderMapperSpy()
-        let sut = RemoteWeatherLoader(url: url, client: client, mapper: mapper)
+        let (client, mapper, sut) = makeSUT(url: url)
         
         client.result = .success(Data(), HTTPURLResponse(url: url,
                                                          statusCode: 200,
@@ -119,8 +116,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     
     func test_loadWeatherDeliversNon200HTTPStatusCode() {
         let url = URL(string: "https://google.com")!
-        let client = HTTPClientSpy()
-        let sut = RemoteWeatherLoader(url: url, client: client, mapper: RemoteWeatherLoaderMapperSpy())
+        let (client, _, sut) = makeSUT(url: url)
         
         client.result = .success(Data(), HTTPURLResponse(url: url,
                                                          statusCode: 300,
@@ -142,9 +138,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     
     func test_loadWeatherDeliversInvalidData() {
         let url = URL(string: "https://google.com")!
-        let client = HTTPClientSpy()
-        let mapper = RemoteWeatherLoaderMapperSpy()
-        let sut = RemoteWeatherLoader(url: url, client: client, mapper: mapper)
+        let (client, _, sut) = makeSUT(url: url)
         
         client.result = .success(Data(), HTTPURLResponse(url: url,
                                                          statusCode: 200,
@@ -166,6 +160,14 @@ class RemoteWeatherLoaderTests: XCTestCase {
     }
 
     //MARK: Helpers
+    
+    private func makeSUT(url: URL = URL(string: "https://google.com")!) -> (client: HTTPClientSpy, mapper: RemoteWeatherLoaderMapperSpy, sut: RemoteWeatherLoader) {
+        let client = HTTPClientSpy()
+        let mapper = RemoteWeatherLoaderMapperSpy()
+        let sut = RemoteWeatherLoader(url: url, client: client, mapper: mapper)
+        
+        return (client: client, mapper: mapper, sut: sut)
+    }
     
     private class HTTPClientSpy: HTTPClient {
         var result: HTTPClientResult?
