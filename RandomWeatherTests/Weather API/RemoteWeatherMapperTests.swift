@@ -11,7 +11,7 @@ import RandomWeather
 class RemoteWeatherMapperTests: XCTestCase {
     
     func test_getsNilWhenMappingAnEmptyJSON() {
-        let mapper = RemoteWeatherLoaderMapperClass()
+        let mapper = RemoteWeatherLoaderMapper()
         
         let json = """
             {}
@@ -27,7 +27,7 @@ class RemoteWeatherMapperTests: XCTestCase {
     }
     
     func test_getsCorrectWeatherWhenMappingAWrongJSON() {
-        let mapper = RemoteWeatherLoaderMapperClass()
+        let mapper = RemoteWeatherLoaderMapper()
         
         let json = """
             {"test" : "test"}
@@ -43,7 +43,7 @@ class RemoteWeatherMapperTests: XCTestCase {
     }
     
     func test_getsCorrectWeatherWhenMappingCorrectJSON() {
-        let mapper = RemoteWeatherLoaderMapperClass()
+        let mapper = RemoteWeatherLoaderMapper()
         
         let json = """
             {"coord": { "lon": 139,"lat": 35},

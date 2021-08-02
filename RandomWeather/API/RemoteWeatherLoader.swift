@@ -7,14 +7,14 @@
 
 import Foundation
 
-public protocol RemoteWeatherLoaderMapper {
+public protocol RemoteWeatherLoaderMapperProtocol {
     func map(_ data: Data, from response: HTTPURLResponse) -> Weather?
 }
 
 public final class RemoteWeatherLoader: WeatherLoader {
     let url: URL
     let client: HTTPClient
-    let mapper: RemoteWeatherLoaderMapper
+    let mapper: RemoteWeatherLoaderMapperProtocol
     
     public enum Error: Swift.Error {
         case connectivity
@@ -22,7 +22,7 @@ public final class RemoteWeatherLoader: WeatherLoader {
         case invalidData
     }
 
-    public init(url: URL, client: HTTPClient, mapper: RemoteWeatherLoaderMapper) {
+    public init(url: URL, client: HTTPClient, mapper: RemoteWeatherLoaderMapperProtocol) {
         self.url = url
         self.client = client
         self.mapper = mapper

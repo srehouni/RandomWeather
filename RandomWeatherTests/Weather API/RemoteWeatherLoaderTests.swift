@@ -116,7 +116,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         }
     }
     
-    private class RemoteWeatherLoaderMapperSpy: RemoteWeatherLoaderMapper {
+    private class RemoteWeatherLoaderMapperSpy: RemoteWeatherLoaderMapperProtocol {
         var weather: Weather?
         
         func map(_ data: Data, from response: HTTPURLResponse) -> Weather? {
