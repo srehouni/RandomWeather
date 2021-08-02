@@ -96,7 +96,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         XCTAssertEqual(capturedError, .invalidData)
     }
 
-    //MARK: Helpers
+    //MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://google.com")!) -> (client: HTTPClientSpy, mapper: RemoteWeatherLoaderMapperSpy, sut: RemoteWeatherLoader) {
         let client = HTTPClientSpy()

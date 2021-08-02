@@ -8,21 +8,6 @@
 import XCTest
 import RandomWeather
 
-class WeatherDetailViewModel {
-    var shouldPresentErrorMessage: String?
-    let weatherLoader: WeatherLoader
-    
-    init(weatherLoader: WeatherLoader) {
-        self.weatherLoader = weatherLoader
-    }
-    
-    func loadWeather() {
-        weatherLoader.loadWeather { [weak self] result in
-            self?.shouldPresentErrorMessage = "Error"
-        }
-    }
-}
-
 class WeatherLoaderSpy: WeatherLoader {
     var result: WeatherLoader.Result?
     
@@ -32,7 +17,6 @@ class WeatherLoaderSpy: WeatherLoader {
         }
     }
 }
-
 
 class WeatherDetailViewModelTests: XCTestCase {
 
@@ -45,6 +29,39 @@ class WeatherDetailViewModelTests: XCTestCase {
         viewModel.loadWeather()
         
         XCTAssertNotNil(viewModel.shouldPresentErrorMessage)
+    }
+    
+    func test_triesToLoadWeatherAndSucceeds() {
+        let weatherLoader = WeatherLoaderSpy()
+        let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader)
+        
+        weatherLoader.result = .success(createRandomWeather())
+        
+        viewModel.loadWeather()
+        
+        XCTAssertEqual(viewModel.cityName, "Shuzenji")
+        XCTAssertEqual(viewModel.description, "Clear")
+        XCTAssertEqual(viewModel.temperature, "281.52")
+        XCTAssertEqual(viewModel.feelsLike, "278.99")
+        XCTAssertEqual(viewModel.minTemperature, "280.15")
+        XCTAssertEqual(viewModel.maxTemperature, "283.71")
+        XCTAssertEqual(viewModel.pressure, "1016")
+        XCTAssertEqual(viewModel.humidity, "93")
+    }
+    
+    //MARK: - Helpers
+    
+    private func createRandomWeather() -> Weather {
+        return Weather(city: City(name: "Shuzenji",
+                        location: Location(latitude: 35,
+                                              longitude: 139)),
+                stats: WeatherStats(description: "Clear",
+                                    temperature: 281.52,
+                                    feelsLike: 278.99,
+                                    minTemperature: 280.15,
+                                    maxTemperature: 283.71,
+                                    pressure: 1016,
+                                    humidity: 93))
     }
 
 }
