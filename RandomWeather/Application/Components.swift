@@ -14,7 +14,7 @@ class Components {
                                                weatherLoaderErrorHandling: RemoteWeatherLoaderErrorHandling())
         let viewController: WeatherDetailViewController = WeatherDetailViewController.create(viewModel: viewModel)
         viewController.progressView = ProgressViewComponent()
-        
+        viewController.alertView = AlertViewComponent()
         return viewController
     }
 }

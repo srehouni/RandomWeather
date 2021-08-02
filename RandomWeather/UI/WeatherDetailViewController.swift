@@ -27,6 +27,7 @@ public final class WeatherDetailViewController: UIViewController, Componentable 
     @IBOutlet private weak var windLabel: UILabel!
     
     var progressView: ProgressViewComponent?
+    var alertView: AlertViewComponent?
     
     private var refreshControl: UIRefreshControl!
     
@@ -92,7 +93,15 @@ public final class WeatherDetailViewController: UIViewController, Componentable 
             }
         }).disposed(by: disposeBag)
         
-        //viewModel?.shouldPresentErrorMessage
+        viewModel?.shouldPresentErrorMessage.subscribe(onNext: { [weak self] message in
+            guard let self = self,
+                  let message = message else { return }
+            DispatchQueue.main.async {
+                self.alertView?.showAlert(title: nil,
+                                       message: message,
+                                       handler: nil, viewController: self)
+            }
+        }).disposed(by: disposeBag)
     }
 }
 
