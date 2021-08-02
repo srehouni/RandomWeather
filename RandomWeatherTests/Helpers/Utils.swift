@@ -8,6 +8,16 @@
 import Foundation
 import RandomWeather
 
+class WeatherLoaderSpy: WeatherLoader {
+    var result: WeatherLoader.Result?
+    
+    func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
+        if let result = result {
+            completion(result)
+        }
+    }
+}
+
 func createRandomWeather() -> Weather {
     return Weather(city: City(name: "Shuzenji",
                     location: Location(latitude: 35,

@@ -79,17 +79,4 @@ class WeatherDetailViewModelTests: XCTestCase {
         
         XCTAssertEqual(capturedValues, ["Shuzenji", "Clear", "23º", "23º", "Min 19º", "Máx 25º", "1016 hPa", "93%", "7.8km/h"])
     }
-    
-    //MARK: - Helpers
-    
-    private class WeatherLoaderSpy: WeatherLoader {
-        var result: WeatherLoader.Result?
-        
-        func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
-            if let result = result {
-                completion(result)
-            }
-        }
-    }
-
 }

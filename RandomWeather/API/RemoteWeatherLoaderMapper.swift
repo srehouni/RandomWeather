@@ -7,6 +7,10 @@
 
 import Foundation
 
+public protocol RemoteWeatherLoaderMapperProtocol {
+    func map(_ data: Data, from response: HTTPURLResponse) -> Weather?
+}
+
 public class RemoteWeatherLoaderMapper: RemoteWeatherLoaderMapperProtocol {
     public init() {}
     

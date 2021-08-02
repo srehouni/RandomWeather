@@ -131,6 +131,7 @@
 		8E8D203526B47F8400EAED04 /* RandomWeather */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D204426B47F8600EAED04 /* Info.plist */,
 				8E8D208726B81A7800EAED04 /* Shared */,
 				8E8D209226B8705700EAED04 /* Application */,
 				8E8D208D26B85B3100EAED04 /* API Infra */,
@@ -254,7 +255,6 @@
 				8E8D209C26B87B1800EAED04 /* RemoteWeatherLoaderErrorHandling.swift */,
 				8E8D203F26B47F8600EAED04 /* Assets.xcassets */,
 				8E8D204126B47F8600EAED04 /* LaunchScreen.storyboard */,
-				8E8D204426B47F8600EAED04 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
