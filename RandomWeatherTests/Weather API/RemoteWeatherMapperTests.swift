@@ -9,8 +9,8 @@ import XCTest
 import RandomWeather
 
 class RemoteWeatherLoaderMapperClass {
-    func map(_ data: Data, from response: HTTPURLResponse) -> RemoteWeather? {
-        return try? JSONDecoder().decode(RemoteWeather.self, from: data)
+    func map(_ data: Data, from response: HTTPURLResponse) -> Weather? {
+        return try? JSONDecoder().decode(RemoteWeather.self, from: data).toDomain()
     }
 }
 
@@ -21,6 +21,21 @@ struct RemoteWeather: Decodable {
     let wind: RemoteWeatherWind
     let sys: RemoteSys
     let name: String
+}
+
+extension RemoteWeather {
+    func toDomain() -> Weather {
+        return Weather(city: City(name: name,
+                                  location: Location(latitude: coord.latitude,
+                                                     longitude: coord.longitude)),
+                       stats: WeatherStats(description: weather.first?.main.description ?? "",
+                                           temperature: main.temp,
+                                           feelsLike: main.feelsLike,
+                                           minTemperature: main.tempMin,
+                                           maxTemperature: main.tempMax,
+                                           pressure: main.pressure,
+                                           humidity: main.humidity))
+    }
 }
 
 struct RemoteWeatherStats: Decodable {
@@ -148,27 +163,8 @@ class RemoteWeatherMapperTests: XCTestCase {
                                                             statusCode: 200,
                                                             httpVersion: nil,
                                                             headerFields: nil)!)
-
-        XCTAssertEqual(weather?.coord.latitude, 35)
-        XCTAssertEqual(weather?.coord.longitude, 139)
-        
-        XCTAssertEqual(weather?.weather[0].main, "Clear")
-        XCTAssertEqual(weather?.weather[0].description, "clear sky")
-        
-        XCTAssertEqual(weather?.main.temp, 281.52)
-        XCTAssertEqual(weather?.main.feelsLike, 278.99)
-        XCTAssertEqual(weather?.main.tempMin, 280.15)
-        XCTAssertEqual(weather?.main.tempMax, 283.71)
-        XCTAssertEqual(weather?.main.pressure, 1016)
-        XCTAssertEqual(weather?.main.humidity, 93)
-        
-        XCTAssertEqual(weather?.wind.speed, 0.47)
-        XCTAssertEqual(weather?.wind.deg, 107.538)
-        
-        XCTAssertEqual(weather?.sys.sunrise, 1560281377)
-        XCTAssertEqual(weather?.sys.sunset, 1560333478)
-        
-        XCTAssertEqual(weather?.name, "Shuzenji")
+    
+        XCTAssertEqual(weather, createRandomWeather())
     }
     
     //MARK: - Helpers
@@ -177,7 +173,7 @@ class RemoteWeatherMapperTests: XCTestCase {
         return Weather(city: City(name: "Shuzenji",
                         location: Location(latitude: 35,
                                               longitude: 139)),
-                stats: WeatherStats(description: "Clear sky",
+                stats: WeatherStats(description: "Clear",
                                     temperature: 281.52,
                                     feelsLike: 278.99,
                                     minTemperature: 280.15,

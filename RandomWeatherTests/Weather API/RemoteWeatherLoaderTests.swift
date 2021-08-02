@@ -36,7 +36,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
                                                          statusCode: 200,
                                                          httpVersion: nil,
                                                          headerFields: nil)!)
-        mapper.weather = Weather()
+        mapper.weather = createRandomWeather()
         var capturedWeather: Weather?
         
         sut.loadWeather { result in
@@ -125,6 +125,19 @@ class RemoteWeatherLoaderTests: XCTestCase {
             }
             return weather
         }
+    }
+    
+    private func createRandomWeather() -> Weather {
+        return Weather(city: City(name: "Shuzenji",
+                        location: Location(latitude: 35,
+                                              longitude: 139)),
+                stats: WeatherStats(description: "Clear sky",
+                                    temperature: 281.52,
+                                    feelsLike: 278.99,
+                                    minTemperature: 280.15,
+                                    maxTemperature: 283.71,
+                                    pressure: 1016,
+                                    humidity: 93))
     }
 
 }
