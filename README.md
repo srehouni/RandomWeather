@@ -43,3 +43,17 @@ Then the app should display the weather for such random location
 
 ## Architecture
 ![Architecture](architecture.png)
+
+The architecture is based on a modular design following the clean architecture and SOLID principles. The dependency between modules is from the outside in, which means inner modules don't depend on outter modules.
+There are 6 modules:
+1. Domain (Business logic)  
+2. API (Application logic - Use case)
+3. Presentation (Presentation logic)
+4. UI 
+5. API Infra
+6. Application
+
+There is also a seventh module which contains some compontes that can be used from other modules.
+
+### Domain (Business logic)
+
