@@ -101,7 +101,10 @@ class RemoteWeatherLoaderTests: XCTestCase {
     private func makeSUT(url: URL = URL(string: "https://google.com")!) -> (client: HTTPClientSpy, mapper: RemoteWeatherLoaderMapperSpy, sut: RemoteWeatherLoader) {
         let client = HTTPClientSpy()
         let mapper = RemoteWeatherLoaderMapperSpy()
-        let sut = RemoteWeatherLoader(url: url, client: client, mapper: mapper)
+        let sut = RemoteWeatherLoader(urlGenerator: RandomURLGeneratorSpy(url: url),
+                                      client: client,
+                                      mapper:
+                                        mapper)
         
         return (client: client, mapper: mapper, sut: sut)
     }
@@ -127,17 +130,15 @@ class RemoteWeatherLoaderTests: XCTestCase {
         }
     }
     
-    private func createRandomWeather() -> Weather {
-        return Weather(city: City(name: "Shuzenji",
-                        location: Location(latitude: 35,
-                                              longitude: 139)),
-                stats: WeatherStats(description: "Clear sky",
-                                    temperature: 281.52,
-                                    feelsLike: 278.99,
-                                    minTemperature: 280.15,
-                                    maxTemperature: 283.71,
-                                    pressure: 1016,
-                                    humidity: 93))
+    private class RandomURLGeneratorSpy: URLGenerator {
+        let url: URL
+        
+        init(url: URL) {
+            self.url = url
+        }
+        
+        func getURL() -> URL? {
+            return url
+        }
     }
-
 }

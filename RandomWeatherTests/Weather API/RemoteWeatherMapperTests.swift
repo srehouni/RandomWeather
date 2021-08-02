@@ -57,15 +57,15 @@ class RemoteWeatherMapperTests: XCTestCase {
                  ],
                  "base": "stations",
                  "main": {
-                   "temp": 281.52,
-                   "feels_like": 278.99,
-                   "temp_min": 280.15,
-                   "temp_max": 283.71,
+                   "temp": 296.15,
+                   "feels_like": 296.15,
+                   "temp_min": 292.15,
+                   "temp_max": 298.15,
                    "pressure": 1016,
                    "humidity": 93
                  },
                  "wind": {
-                   "speed": 0.47,
+                   "speed": 7.8,
                    "deg": 107.538
                  },
                  "clouds": {
@@ -94,20 +94,5 @@ class RemoteWeatherMapperTests: XCTestCase {
                                                             headerFields: nil)!)
     
         XCTAssertEqual(weather, createRandomWeather())
-    }
-    
-    //MARK: - Helpers
-    
-    private func createRandomWeather() -> Weather {
-        return Weather(city: City(name: "Shuzenji",
-                        location: Location(latitude: 35,
-                                              longitude: 139)),
-                stats: WeatherStats(description: "Clear",
-                                    temperature: 281.52,
-                                    feelsLike: 278.99,
-                                    minTemperature: 280.15,
-                                    maxTemperature: 283.71,
-                                    pressure: 1016,
-                                    humidity: 93))
     }
 }

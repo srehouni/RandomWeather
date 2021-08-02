@@ -19,14 +19,15 @@ public struct Weather {
 
 public struct WeatherStats {
     let description: String
-    let temperature: Float
-    let feelsLike: Float
-    let minTemperature: Float
-    let maxTemperature: Float
+    let temperature: Int
+    let feelsLike: Int
+    let minTemperature: Int
+    let maxTemperature: Int
     let pressure: Int
     let humidity: Int
+    let wind: Float
     
-    public init(description: String, temperature: Float, feelsLike: Float, minTemperature: Float, maxTemperature: Float, pressure: Int, humidity: Int) {
+    public init(description: String, temperature: Int, feelsLike: Int, minTemperature: Int, maxTemperature: Int, pressure: Int, humidity: Int, wind: Float) {
         self.description = description
         self.temperature = temperature
         self.feelsLike = feelsLike
@@ -34,6 +35,7 @@ public struct WeatherStats {
         self.maxTemperature = maxTemperature
         self.pressure = pressure
         self.humidity = humidity
+        self.wind = wind
     }
 }
 
@@ -68,5 +70,6 @@ extension Weather: Equatable {
             && lhs.stats.maxTemperature == rhs.stats.maxTemperature
             && lhs.stats.pressure == rhs.stats.pressure
             && lhs.stats.humidity == rhs.stats.humidity
+            && lhs.stats.wind == rhs.stats.wind
     }
 }
