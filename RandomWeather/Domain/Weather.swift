@@ -56,3 +56,17 @@ public struct Location {
         self.longitude = longitude
     }
 }
+
+extension Weather: Equatable {
+    public static func == (lhs: Weather, rhs: Weather) -> Bool {
+        return lhs.city.name == rhs.city.name
+            && lhs.stats.temperature == rhs.stats.temperature
+            && lhs.stats.description == rhs.stats.description
+            && lhs.stats.temperature == rhs.stats.temperature
+            && lhs.stats.feelsLike == rhs.stats.feelsLike
+            && lhs.stats.minTemperature == rhs.stats.minTemperature
+            && lhs.stats.maxTemperature == rhs.stats.maxTemperature
+            && lhs.stats.pressure == rhs.stats.pressure
+            && lhs.stats.humidity == rhs.stats.humidity
+    }
+}
