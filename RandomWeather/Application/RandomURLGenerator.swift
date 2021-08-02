@@ -14,7 +14,7 @@ public class RandomURLGenerator: URLGenerator {
         self.apiKey = apiKey
     }
     
-    func getURL() -> URL? {
+    public func getURL() -> URL? {
         let (lon, lat) = getRandomCoordinates()
         return URL(string: "https://api.openweathermap.org/data/2.5/weather?lon=\(lon)&lat=\(lat)&appid=\(apiKey)")
     }
