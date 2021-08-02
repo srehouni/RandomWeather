@@ -22,12 +22,13 @@ extension RemoteWeather {
                                   location: Location(latitude: coord.latitude,
                                                      longitude: coord.longitude)),
                        stats: WeatherStats(description: weather.first?.main.description ?? "",
-                                           temperature: main.temp,
-                                           feelsLike: main.feelsLike,
-                                           minTemperature: main.tempMin,
-                                           maxTemperature: main.tempMax,
+                                           temperature: Int(main.temp - 273.15),
+                                           feelsLike: Int(main.feelsLike - 273.15),
+                                           minTemperature: Int(main.tempMin - 273.15),
+                                           maxTemperature: Int(main.tempMax - 273.15),
                                            pressure: main.pressure,
-                                           humidity: main.humidity))
+                                           humidity: main.humidity,
+                                           wind: wind.speed))
     }
 }
 
