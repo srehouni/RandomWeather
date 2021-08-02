@@ -12,7 +12,7 @@ public protocol RemoteWeatherLoaderMapperProtocol {
 }
 
 public final class RemoteWeatherLoader: WeatherLoader {
-    let url: URL
+    let urlGenerator: URLGenerator
     let client: HTTPClient
     let mapper: RemoteWeatherLoaderMapperProtocol
     
@@ -20,15 +20,21 @@ public final class RemoteWeatherLoader: WeatherLoader {
         case connectivity
         case serverError
         case invalidData
+        case invalidURL
     }
 
-    public init(url: URL, client: HTTPClient, mapper: RemoteWeatherLoaderMapperProtocol) {
-        self.url = url
+    public init(urlGenerator: URLGenerator, client: HTTPClient, mapper: RemoteWeatherLoaderMapperProtocol) {
+        self.urlGenerator = urlGenerator
         self.client = client
         self.mapper = mapper
     }
     
     public func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
+        guard let url = urlGenerator.getURL() else {
+            completion(.failure(Error.invalidURL))
+            return
+        }
+        
         client.get(url: url) { [weak self] result in
             switch result {
                 case let .success(data, response):
