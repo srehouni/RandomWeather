@@ -23,6 +23,7 @@
 		8E8D207626B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */; };
 		8E8D207826B808E100EAED04 /* RemoteWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207726B808E100EAED04 /* RemoteWeather.swift */; };
 		8E8D207C26B80A6800EAED04 /* WeatherDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207B26B80A6800EAED04 /* WeatherDetailViewModelTests.swift */; };
+		8E8D207E26B817C700EAED04 /* WeatherDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207D26B817C700EAED04 /* WeatherDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderMapper.swift; sourceTree = "<group>"; };
 		8E8D207726B808E100EAED04 /* RemoteWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeather.swift; sourceTree = "<group>"; };
 		8E8D207B26B80A6800EAED04 /* WeatherDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModelTests.swift; sourceTree = "<group>"; };
+		8E8D207D26B817C700EAED04 /* WeatherDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		8E8D207926B8098700EAED04 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D207D26B817C700EAED04 /* WeatherDetailViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				8E8D206D26B560A000EAED04 /* WeatherLoader.swift in Sources */,
 				8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */,
 				8E8D203926B47F8400EAED04 /* SceneDelegate.swift in Sources */,
+				8E8D207E26B817C700EAED04 /* WeatherDetailViewModel.swift in Sources */,
 				8E8D206F26B560F400EAED04 /* Weather.swift in Sources */,
 				8E8D207826B808E100EAED04 /* RemoteWeather.swift in Sources */,
 				8E8D206A26B55A8B00EAED04 /* RemoteWeatherLoader.swift in Sources */,
