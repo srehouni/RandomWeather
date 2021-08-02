@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol URLGenerator {
+    func getURL() -> URL?
+}
+
 public enum HTTPClientResult {
     case success(Data, HTTPURLResponse)
     case failure(Error)
