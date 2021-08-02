@@ -9,16 +9,6 @@ import XCTest
 import RandomWeather
 import RxSwift
 
-class WeatherLoaderSpy: WeatherLoader {
-    var result: WeatherLoader.Result?
-    
-    func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
-        if let result = result {
-            completion(result)
-        }
-    }
-}
-
 class WeatherDetailViewModelTests: XCTestCase {
 
     func test_triesToLoadWeatherAndFails() {
@@ -26,11 +16,17 @@ class WeatherDetailViewModelTests: XCTestCase {
         let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader,
                                                weatherLoaderErrorHandling: RemoteWeatherLoaderErrorHandling())
         
+        let disposeBag = DisposeBag()
         weatherLoader.result = .failure(NSError(domain: "An error", code: 0, userInfo: nil))
         
         viewModel.loadWeather()
         
-        XCTAssertNotNil(viewModel.shouldPresentErrorMessage)
+        var capturedValue: String?
+        viewModel.shouldPresentErrorMessage.subscribe(onNext: { value in
+            capturedValue = value
+        }).disposed(by: disposeBag)
+        
+        XCTAssertNotNil(capturedValue)
     }
     
     func test_triesToLoadWeatherAndSucceeds() {
@@ -83,4 +79,17 @@ class WeatherDetailViewModelTests: XCTestCase {
         
         XCTAssertEqual(capturedValues, ["Shuzenji", "Clear", "23º", "23º", "Min 19º", "Máx 25º", "1016 hPa", "93%", "7.8km/h"])
     }
+    
+    //MARK: - Helpers
+    
+    private class WeatherLoaderSpy: WeatherLoader {
+        var result: WeatherLoader.Result?
+        
+        func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
+            if let result = result {
+                completion(result)
+            }
+        }
+    }
+
 }

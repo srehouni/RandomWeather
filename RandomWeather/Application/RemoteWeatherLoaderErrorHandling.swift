@@ -13,15 +13,9 @@ public class RemoteWeatherLoaderErrorHandling: WeatherLoaderErrorHandling {
     public func getPresentableError(error: Error) -> String {
         switch error {
             case RemoteWeatherLoader.Error.connectivity:
-                return ""
-            case RemoteWeatherLoader.Error.invalidData:
-                return ""
-            case RemoteWeatherLoader.Error.invalidURL:
-                return ""
-            case RemoteWeatherLoader.Error.serverError:
-                return ""
+                return "Asegurate de tener acceso a internet"
             default:
-                return ""
+                return "Algo ha ido mal"
         }
     }
 }
