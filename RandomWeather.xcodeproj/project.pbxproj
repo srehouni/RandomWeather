@@ -22,6 +22,7 @@
 		8E8D207426B56DAD00EAED04 /* RemoteWeatherMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */; };
 		8E8D207626B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */; };
 		8E8D207826B808E100EAED04 /* RemoteWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207726B808E100EAED04 /* RemoteWeather.swift */; };
+		8E8D207C26B80A6800EAED04 /* WeatherDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207B26B80A6800EAED04 /* WeatherDetailViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherMapperTests.swift; sourceTree = "<group>"; };
 		8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderMapper.swift; sourceTree = "<group>"; };
 		8E8D207726B808E100EAED04 /* RemoteWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeather.swift; sourceTree = "<group>"; };
+		8E8D207B26B80A6800EAED04 /* WeatherDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				8E8D206B26B55AA200EAED04 /* Domain */,
-				8E8D206826B55A6F00EAED04 /* Weather API */,
+				8E8D206826B55A6F00EAED04 /* API */,
+				8E8D207926B8098700EAED04 /* Presentation */,
 				8E8D203626B47F8400EAED04 /* AppDelegate.swift */,
 				8E8D203826B47F8400EAED04 /* SceneDelegate.swift */,
 				8E8D203A26B47F8400EAED04 /* ViewController.swift */,
@@ -111,6 +114,7 @@
 		8E8D204C26B47F8600EAED04 /* RandomWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D207A26B80A2900EAED04 /* Presentation */,
 				8E8D207226B56D8E00EAED04 /* Weather API */,
 				8E8D204D26B47F8600EAED04 /* RandomWeatherTests.swift */,
 				8E8D204F26B47F8600EAED04 /* Info.plist */,
@@ -118,7 +122,7 @@
 			path = RandomWeatherTests;
 			sourceTree = "<group>";
 		};
-		8E8D206826B55A6F00EAED04 /* Weather API */ = {
+		8E8D206826B55A6F00EAED04 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				8E8D206926B55A8B00EAED04 /* RemoteWeatherLoader.swift */,
@@ -126,7 +130,7 @@
 				8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */,
 				8E8D207726B808E100EAED04 /* RemoteWeather.swift */,
 			);
-			path = "Weather API";
+			path = API;
 			sourceTree = "<group>";
 		};
 		8E8D206B26B55AA200EAED04 /* Domain */ = {
@@ -145,6 +149,21 @@
 				8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */,
 			);
 			path = "Weather API";
+			sourceTree = "<group>";
+		};
+		8E8D207926B8098700EAED04 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8E8D207A26B80A2900EAED04 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D207B26B80A6800EAED04 /* WeatherDetailViewModelTests.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +284,7 @@
 			files = (
 				8E8D206726B48CF100EAED04 /* RemoteWeatherLoaderTests.swift in Sources */,
 				8E8D204E26B47F8600EAED04 /* RandomWeatherTests.swift in Sources */,
+				8E8D207C26B80A6800EAED04 /* WeatherDetailViewModelTests.swift in Sources */,
 				8E8D207426B56DAD00EAED04 /* RemoteWeatherMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
