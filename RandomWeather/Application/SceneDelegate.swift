@@ -7,12 +7,6 @@
 
 import UIKit
 
-class WeatherLoaderClass: WeatherLoader {
-    func loadWeather(completion: @escaping (WeatherLoader.Result) -> Void) {
-        completion(.failure(NSError(domain: "adad", code: 1, userInfo: nil)))
-    }
-}
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?

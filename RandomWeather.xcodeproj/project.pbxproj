@@ -138,11 +138,6 @@
 				8E8D206826B55A6F00EAED04 /* API */,
 				8E8D207926B8098700EAED04 /* Presentation */,
 				8E8D207F26B819DC00EAED04 /* UI */,
-				8E8D203626B47F8400EAED04 /* AppDelegate.swift */,
-				8E8D208B26B84C5500EAED04 /* SceneDelegate.swift */,
-				8E8D203F26B47F8600EAED04 /* Assets.xcassets */,
-				8E8D204126B47F8600EAED04 /* LaunchScreen.storyboard */,
-				8E8D204426B47F8600EAED04 /* Info.plist */,
 			);
 			path = RandomWeather;
 			sourceTree = "<group>";
@@ -251,10 +246,15 @@
 		8E8D209226B8705700EAED04 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				8E8D203626B47F8400EAED04 /* AppDelegate.swift */,
+				8E8D208B26B84C5500EAED04 /* SceneDelegate.swift */,
 				8E8D209026B86F4900EAED04 /* RandomURLGenerator.swift */,
 				8E8D209326B870DD00EAED04 /* Components.swift */,
 				8E8D209526B8725800EAED04 /* RandomWeatherConstants.swift */,
 				8E8D209C26B87B1800EAED04 /* RemoteWeatherLoaderErrorHandling.swift */,
+				8E8D203F26B47F8600EAED04 /* Assets.xcassets */,
+				8E8D204126B47F8600EAED04 /* LaunchScreen.storyboard */,
+				8E8D204426B47F8600EAED04 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
