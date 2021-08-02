@@ -7,6 +7,7 @@
 
 import XCTest
 import RandomWeather
+import RxSwift
 
 class WeatherLoaderSpy: WeatherLoader {
     var result: WeatherLoader.Result?
@@ -22,7 +23,8 @@ class WeatherDetailViewModelTests: XCTestCase {
 
     func test_triesToLoadWeatherAndFails() {
         let weatherLoader = WeatherLoaderSpy()
-        let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader)
+        let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader,
+                                               weatherLoaderErrorHandling: RemoteWeatherLoaderErrorHandling())
         
         weatherLoader.result = .failure(NSError(domain: "An error", code: 0, userInfo: nil))
         
@@ -33,35 +35,52 @@ class WeatherDetailViewModelTests: XCTestCase {
     
     func test_triesToLoadWeatherAndSucceeds() {
         let weatherLoader = WeatherLoaderSpy()
-        let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader)
+        let viewModel = WeatherDetailViewModel(weatherLoader: weatherLoader,
+                                               weatherLoaderErrorHandling: RemoteWeatherLoaderErrorHandling())
+        let disposeBag = DisposeBag()
         
         weatherLoader.result = .success(createRandomWeather())
         
         viewModel.loadWeather()
         
-        XCTAssertEqual(viewModel.cityName, "Shuzenji")
-        XCTAssertEqual(viewModel.description, "Clear")
-        XCTAssertEqual(viewModel.temperature, "281.52")
-        XCTAssertEqual(viewModel.feelsLike, "278.99")
-        XCTAssertEqual(viewModel.minTemperature, "280.15")
-        XCTAssertEqual(viewModel.maxTemperature, "283.71")
-        XCTAssertEqual(viewModel.pressure, "1016")
-        XCTAssertEqual(viewModel.humidity, "93")
+        var capturedValues = [String?]()
+        
+        viewModel.cityNameObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.descriptionObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.temperatureObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.feelsLikeObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.minTemperatureObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.maxTemperatureObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.pressureObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.humidityObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        viewModel.windObservable.subscribe(onNext: { value in
+            capturedValues.append(value)
+        }).disposed(by: disposeBag)
+        
+        XCTAssertEqual(capturedValues, ["Shuzenji", "Clear", "23º", "23º", "Min 19º", "Máx 25º", "1016 hPa", "93%", "7.8km/h"])
     }
-    
-    //MARK: - Helpers
-    
-    private func createRandomWeather() -> Weather {
-        return Weather(city: City(name: "Shuzenji",
-                        location: Location(latitude: 35,
-                                              longitude: 139)),
-                stats: WeatherStats(description: "Clear",
-                                    temperature: 281.52,
-                                    feelsLike: 278.99,
-                                    minTemperature: 280.15,
-                                    maxTemperature: 283.71,
-                                    pressure: 1016,
-                                    humidity: 93))
-    }
-
 }
