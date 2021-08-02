@@ -20,6 +20,8 @@
 		8E8D206F26B560F400EAED04 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D206E26B560F400EAED04 /* Weather.swift */; };
 		8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207026B5616700EAED04 /* HTTPClient.swift */; };
 		8E8D207426B56DAD00EAED04 /* RemoteWeatherMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */; };
+		8E8D207626B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */; };
+		8E8D207826B808E100EAED04 /* RemoteWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D207726B808E100EAED04 /* RemoteWeather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		8E8D206E26B560F400EAED04 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		8E8D207026B5616700EAED04 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8E8D207326B56DAD00EAED04 /* RemoteWeatherMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherMapperTests.swift; sourceTree = "<group>"; };
+		8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderMapper.swift; sourceTree = "<group>"; };
+		8E8D207726B808E100EAED04 /* RemoteWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 			children = (
 				8E8D206926B55A8B00EAED04 /* RemoteWeatherLoader.swift */,
 				8E8D207026B5616700EAED04 /* HTTPClient.swift */,
+				8E8D207526B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift */,
+				8E8D207726B808E100EAED04 /* RemoteWeather.swift */,
 			);
 			path = "Weather API";
 			sourceTree = "<group>";
@@ -243,10 +249,12 @@
 			files = (
 				8E8D203B26B47F8400EAED04 /* ViewController.swift in Sources */,
 				8E8D203726B47F8400EAED04 /* AppDelegate.swift in Sources */,
+				8E8D207626B808CB00EAED04 /* RemoteWeatherLoaderMapper.swift in Sources */,
 				8E8D206D26B560A000EAED04 /* WeatherLoader.swift in Sources */,
 				8E8D207126B5616700EAED04 /* HTTPClient.swift in Sources */,
 				8E8D203926B47F8400EAED04 /* SceneDelegate.swift in Sources */,
 				8E8D206F26B560F400EAED04 /* Weather.swift in Sources */,
+				8E8D207826B808E100EAED04 /* RemoteWeather.swift in Sources */,
 				8E8D206A26B55A8B00EAED04 /* RemoteWeatherLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
