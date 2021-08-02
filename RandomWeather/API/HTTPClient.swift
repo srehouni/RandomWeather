@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLGenerator {
+public protocol URLGenerator {
     func getURL() -> URL?
 }
 
