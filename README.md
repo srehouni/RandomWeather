@@ -42,3 +42,4 @@ Then the app should display the weather for such random location
 ---
 
 ## Architecture
+![Architecture](architecture.png)
