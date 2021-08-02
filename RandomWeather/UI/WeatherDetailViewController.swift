@@ -14,19 +14,21 @@ public final class WeatherDetailViewController: UIViewController, Componentable 
     
     public static let storyboardName = "WeatherDetail"
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var cityNameLabel: UILabel!
-    @IBOutlet weak var weatherDescriptionLabel: UILabel!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
-    @IBOutlet weak var minTemperatureLabel: UILabel!
-    @IBOutlet weak var maxTemperatureLabel: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet private weak var cityNameLabel: UILabel!
+    @IBOutlet private weak var weatherDescriptionLabel: UILabel!
+    @IBOutlet private weak var temperatureLabel: UILabel!
+    @IBOutlet private weak var feelsLikeLabel: UILabel!
+    @IBOutlet private weak var minTemperatureLabel: UILabel!
+    @IBOutlet private weak var maxTemperatureLabel: UILabel!
+    @IBOutlet private weak var pressureLabel: UILabel!
+    @IBOutlet private weak var humidityLabel: UILabel!
+    @IBOutlet private weak var windLabel: UILabel!
     
-    var refreshControl: UIRefreshControl!
+    var progressView: ProgressViewComponent?
+    
+    private var refreshControl: UIRefreshControl!
     
     private let disposeBag = DisposeBag()
 
@@ -83,7 +85,13 @@ public final class WeatherDetailViewController: UIViewController, Componentable 
             .bind(to: windLabel.rx.text)
             .disposed(by: disposeBag)
         
-        //viewModel?.shouldPresentLoading
+        viewModel?.shouldPresentLoading.subscribe(onNext: { [weak self] value in
+            DispatchQueue.main.async {
+                guard let view = self?.view else { return }
+                self?.progressView?.showProgress(show: value, title: "", view: view)
+            }
+        }).disposed(by: disposeBag)
+        
         //viewModel?.shouldPresentErrorMessage
     }
 }

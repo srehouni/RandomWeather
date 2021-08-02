@@ -13,6 +13,7 @@ class Components {
         let viewModel = WeatherDetailViewModel(weatherLoader: createRemoteweatherLoader(),
                                                weatherLoaderErrorHandling: RemoteWeatherLoaderErrorHandling())
         let viewController: WeatherDetailViewController = WeatherDetailViewController.create(viewModel: viewModel)
+        viewController.progressView = ProgressViewComponent()
         
         return viewController
     }
