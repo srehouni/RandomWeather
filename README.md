@@ -56,4 +56,24 @@ There are 6 modules:
 There is also a seventh module which contains some compontes that can be used from other modules.
 
 ### Domain (Business logic)
+It contains the data structure that represents the business needs and the WeatherLoader protocol.
 
+### API (Application logic - Use case)
+This module represents the use case. The RemoteWeatherLoader dependes on the HTTPClient protocol which can be implemented by a networking infraestructure detail. 
+It also holds a dependency to the RemoteWeatherLoaderMapper which is in charge of mapping the Data response into a RemoteWeather data structure and then obtaining the business model from it.
+
+### Presentation (Presentation logic)
+The main component of the presentation layer is the WeatherDetailViewModel. This component is in charge of obtaining the domain model from the use case and turn it into a more pleasant data to present to the user. Its was built follwowing the binding principles so the UI can be updated everytime the ViewModel updates its properties without relying on manual actions.
+There is algo a WeatherLoaderErrorHandling protocol in order to translate the use case errors into user friendly error messages. The class which conforms to this protocol will be created on the Application module, so we can decouple as much as possible the presentation layer from implementation details of the use case such as networking error types.
+
+### UI
+The UI contains a WeatherDetailViewController with its Storyboard. Pretty basic UIViewController which has a pull to refresh feature.
+
+### API Infra
+This is where the networking implementation details  can be found. URLSessionHTTPClient implements the HTTPClient protocol and will be injected into the RemoteWeatherLoader on the composition/Application layer. Our components should no be depending on infraestructure details, that's why we have a whole module for that. 
+
+### Application
+This module is where the composition of all the modules is being made. This module is the only one that belongs to our app, the rest could be external frameworks that can be easily compose without problems. And we can use them in different apps. 
+The Components class is the one in charge of the creation and compositions of  the different modules. We also have some implementation details that cannot be on any other module because they also depend on other implementation details (RandomURLGenerator and RemoteWeatherLoaderErrorHandling) that might only be related to the app.
+
+This architecture allows to test on isolation all the modules thanks to the low coupling between modules. We can also compose modules pretty easily, even extending new functionality like for example adding local cache when there is no internet connectivity.
